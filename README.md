@@ -17,7 +17,7 @@ The downloader is idempotent — re-running on the same day is a no-op.
 
 ### GitHub Actions (recommended)
 
-`.github/workflows/download.yml` runs the downloader every weekday at 22:00 UTC (~3pm PT / 6pm ET) and commits any new CSV back to the repo. Manual runs available via the Actions tab → "Run workflow".
+`.github/workflows/download.yml` runs the downloader every weekday at 13:00 UTC (6am PDT / 5am PST) and commits any new CSV back to the repo. Manual runs available via the Actions tab → "Run workflow".
 
 ### Local cron (alternative)
 

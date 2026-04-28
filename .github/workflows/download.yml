@@ -2,7 +2,7 @@ name: Download ARKVX holdings
 
 on:
   schedule:
-    - cron: '0 22 * * 1-5'  # weekdays 22:00 UTC (~3pm PT / 6pm ET)
+    - cron: '0 13 * * 1-5'  # weekdays 13:00 UTC (6am PDT / 5am PST)
   workflow_dispatch:
 
 permissions:
