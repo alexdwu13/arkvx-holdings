@@ -26,7 +26,8 @@ macOS cron does not run while the machine is asleep — if reliability matters, 
 ```bash
 python3 visualize.py
 ```
-<img width="549" height="993" alt="image" src="https://github.com/user-attachments/assets/ebb57c42-1893-4940-88a4-c343d1189e02" />
+<img width="821" height="846" alt="image" src="https://github.com/user-attachments/assets/eb2747cd-82b4-4c28-a7cb-cef8eae8e3fd" />
+
 
 Renders a stacked-100% bar chart with one column per snapshot and a legend showing the latest weight per holding. Holdings whose cumulative weight from the bottom is under `--other-pct` (default 10%) are folded into a gray "Other" band.
 
