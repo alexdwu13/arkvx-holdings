@@ -1,0 +1,30 @@
+name: Download ARKVX holdings
+
+on:
+  schedule:
+    - cron: '0 22 * * 1-5'  # weekdays 22:00 UTC (~3pm PT / 6pm ET)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run downloader
+        run: ./download.sh
+
+      - name: Commit new file (if any)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/
+          if git diff --staged --quiet; then
+            echo "No new holdings file."
+          else
+            git commit -m "data: ARKVX holdings $(date -u +%Y-%m-%d)"
+            git push
+          fi

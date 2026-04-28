@@ -11,15 +11,21 @@ chmod +x download.sh
 ./download.sh         # writes data/ARKVX_HOLDINGS_YYYY-MM-DD.csv
 ```
 
-## Schedule via cron
+## Scheduled downloads
 
-The downloader is idempotent — running multiple times per day re-uses the existing file. Schedule a few runs to catch the publish window:
+The downloader is idempotent — re-running on the same day is a no-op.
+
+### GitHub Actions (recommended)
+
+`.github/workflows/download.yml` runs the downloader every weekday at 22:00 UTC (~3pm PT / 6pm ET) and commits any new CSV back to the repo. Manual runs available via the Actions tab → "Run workflow".
+
+### Local cron (alternative)
 
 ```
 0 8,10,12,14,16 * * 1-5 cd /Users/alexwu/work/arkvx-holdings && { echo "[$(date '+%Y-%m-%d %H:%M:%S %Z')]"; ./download.sh; } >> cron.log 2>&1
 ```
 
-macOS cron does not run while the machine is asleep — if reliability matters, use `launchd` with `StartCalendarInterval` or keep the Mac awake during business hours.
+macOS cron does not run while the machine is asleep — for reliability use the GitHub Action above, or `launchd` with `StartCalendarInterval`.
 
 ## Visualize
 
