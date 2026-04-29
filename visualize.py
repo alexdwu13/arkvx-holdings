@@ -320,12 +320,17 @@ def main(argv=None):
     if subtitle:
         print(f"  \x1b[2m{subtitle}\x1b[0m")
     print()
-    for line in lines:
-        print(line)
-    print()
-    legend = render_legend(names, name_color, matrix[-1], max_width=term.columns)
-    for line in legend:
-        print(line)
+
+    chart_plain_w = 5 + n * (col_width + gap)
+    legend_w = max(20, term.columns - chart_plain_w - 3)
+    legend = render_legend(names, name_color, matrix[-1], max_width=legend_w)
+
+    pad = " " * chart_plain_w
+    total = max(len(lines), len(legend))
+    for i in range(total):
+        chart_line = lines[i] if i < len(lines) else pad
+        legend_line = legend[i] if i < len(legend) else ""
+        print(f"{chart_line}   {legend_line}")
     return 0
 
 
